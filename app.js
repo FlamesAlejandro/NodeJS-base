@@ -23,8 +23,15 @@ app.use('/users', userRoutes);
 const PORT = process.env.PORT || 3000;
 
 // Sincronizar los modelos con la base de datos y arrancar el servidor
-sequelize.sync({ force: true }).then(() => {
+// Crear la bdd y las tablas
+// el { force: true } borra y los crea cada vez que se ejecuta! quitar en prod
+// para modificar tablas y no borrarlas ({ alter: true })
+sequelize.sync({ force: true }).then(async () => {
     console.log('Database & tables created!');
+
+    // Insertar los datos de prueba
+    await seedDatabase();
+
     app.listen(PORT, () => {
         console.log(`Server is running on port ${PORT}`);
     });
