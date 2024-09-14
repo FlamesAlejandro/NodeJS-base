@@ -33,15 +33,33 @@ const seedDatabase = async () => {
         marca: 'ErgoChair'
     });
 
-    // Usuario administrador
-    const hashedPassword = bcrypt.hashSync('admin123', 8);
-
+    // Crear un usuario administrador
+    const adminPassword = bcrypt.hashSync('admin123', 8);
     await User.create({
         nombre: 'Admin',
         email: 'admin@example.com',
-        password: hashedPassword,
+        password: adminPassword,
         role: 'admin'
     });
+
+    // Crear un usuario worker
+    const workerPassword = bcrypt.hashSync('worker123', 8);
+    await User.create({
+        nombre: 'Worker',
+        email: 'worker@example.com',
+        password: workerPassword,
+        role: 'worker'
+    });
+
+    // Crear un usuario regular
+    const userPassword = bcrypt.hashSync('user123', 8);
+    await User.create({
+        nombre: 'User',
+        email: 'user@example.com',
+        password: userPassword,
+        role: 'user'
+    });
+
 
     console.log('Datos de prueba insertados correctamente');
 };
