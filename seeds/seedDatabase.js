@@ -1,5 +1,7 @@
 const Product = require('../models/productModel');
 const Type = require('../models/typeModel');
+const bcrypt = require('bcryptjs')
+const User = require('../models/userModel')
 
 const seedDatabase = async () => {
     // Crear tipos de productos de prueba

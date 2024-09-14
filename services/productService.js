@@ -4,7 +4,7 @@ const createProduct = async (productData) => {
     return Product.create(productData);
 }
 
-const getAllProduct = async () => {
+const getAllProducts = async () => {
     return Product.findAll();
 }
 

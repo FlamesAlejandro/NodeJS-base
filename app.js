@@ -1,10 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const sequelize = require('./config/db');
-const authRoutes = require('./routes/authRoutes');
-const productRoutes = require('./routes/productRoutes');
-const typeRoutes = require('./routes/typeRoutes');
-const invoiceRoutes = require('./routes/invoiceRoutes');
+const authRoutes = require('./routes/authRoute');
+const productRoutes = require('./routes/productRoute');
+const typeRoutes = require('./routes/typeRoute');
+const invoiceRoutes = require('./routes/invoiceRoute');
+const userRoutes = require('./routes/userRoute')
+const seedDatabase = require('./seeds/seedDatabase')
 require('dotenv').config();
 
 // Inicializar la aplicación de Express
