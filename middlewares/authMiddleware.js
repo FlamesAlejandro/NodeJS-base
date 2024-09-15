@@ -2,9 +2,11 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 exports.verifyToken = (req, res, next) => {
-    const token = req.headers['x-access-token'];
+    const authHeader = req.headers['authorization'];
 
-    if (!token) return res.status(403).send({ auth: false, message: 'No token provided.' });
+    if (!authHeader) return res.status(403).send({ auth: false, message: 'No token provided.' });
+
+    const token = authHeader.split(' ')[1];
 
     jwt.verify(token, process.env.SECRET, (err, decoded) => {
         if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });

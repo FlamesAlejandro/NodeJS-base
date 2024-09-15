@@ -1,24 +1,33 @@
-const authService = require('../services/authService')
+const authService = require('../services/authService');
 
+// Controlador de registro
 exports.register = async (req, res) => {
-    try {
-        const { nombre, email, password } = req.body
-        await authService.register(nombre, email, password)
-        res.status(200).send({ message: 'User registered successfully.' })
-    } catch (error) {
-        res.status(500).send('Error registering the user.');
-    }
-}
+    const { nombre, email, password, role } = req.body;
 
+    try {
+        // Llamar al servicio de registro
+        const { token, user } = await authService.register(nombre, email, password, role);
+
+        // Enviar la respuesta con el token y los detalles del usuario
+        res.status(201).json({ token, user });
+    } catch (error) {
+        console.error(error);
+        res.status(400).json({ message: error.message });
+    }
+};
+
+// Controlador de login
 exports.login = async (req, res) => {
+    const { email, password } = req.body;
+
     try {
-        const { email, password } = req.body
-        const result = await authService.login(email, password)
+        // Llamar al servicio de login
+        const { token, user } = await authService.login(email, password);
 
-        if (!result) return res.status(401).send({ auth: false, token: null })
-
-        res.status(200).send(result)
+        // Enviar la respuesta con el token y los detalles del usuario
+        res.status(200).json({ token, user });
     } catch (error) {
-        res.status(500).send('Error on the server.')
+        console.error(error);
+        res.status(400).json({ message: error.message });
     }
-}
+};
