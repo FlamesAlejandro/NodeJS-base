@@ -28,7 +28,7 @@ const PORT = process.env.PORT || 3000;
 // Crear la bdd y las tablas
 // el { force: true } borra y los crea cada vez que se ejecuta! quitar en prod
 // para modificar tablas y no borrarlas ({ alter: true })
-sequelize.sync({ alter: true }).then(async () => {
+sequelize.sync({ force: true }).then(async () => {
     console.log('Database & tables created!');
 
     // Insertar los datos de prueba
